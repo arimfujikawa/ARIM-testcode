@@ -7,9 +7,9 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
 alive = False
 started = threading.Event()
+t = None
 
 # When windows is closed.
 def _destroy_window():
@@ -45,7 +45,7 @@ button_start = tk.Button(text='START', command=start)
 button_start.pack()
 button_stop = tk.Button(text='STOP', command=stop)
 button_stop.pack()
-button_close = tk.Button(text='CLOSE', command=quit)
+button_close = tk.Button(text='CLOSE', command=_destroy_window)
 button_close.pack()
 
 def _redraw(_, x, y):
@@ -115,5 +115,5 @@ def main():
 
 main()
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#    main()
