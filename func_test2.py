@@ -17,9 +17,18 @@ map_list = [[i, path] for i, path in enumerate(path_list)]
 #     global save_base_path
 #     with save_im(path, save_base_path) as thread:
 #         return path
+
+
+
 def thread_save():
+    global results
     with Pool(os.cpu_count()-1) as p:
-        p.map(save_im, map_list) 
+        p.imap(save_im, map_list)
+        p.close()
+        p.join()
+        print(results)
+        # print(p.map(save_im, map_list)) 
+
         
 # with Pool(os.cpu_count()) as p:
 #         df = pd.concat(p.map(read_report, csv_pathlist))
@@ -44,11 +53,11 @@ def save_im(*args):
         im = np.cov(im_b, im_a)
 
     x = np.argsort(im.flatten())
-    y = np.argsort(x)
+    print(f'{args[0][1]} length = {len(x)}\n')
     results[args[0][0]] = args[0][0]
     print(results)
 
-    return args[0][0],args[0][1]
+    return args[0][0],args[0][1],len(x),results
 
 
 
