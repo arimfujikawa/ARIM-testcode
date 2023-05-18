@@ -1,3 +1,5 @@
+# FIXME:動作しない
+
 from multiprocessing import Manager, cpu_count
 from multiprocessing.managers import SyncManager
 from concurrent import futures
